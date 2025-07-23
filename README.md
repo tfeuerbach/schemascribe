@@ -7,7 +7,7 @@
   A simple, fast, and focused tool for generating and annotating JSON Schemas.
 </p>
 
-SchemaScribe is a lightweight, tool that converts any JSON into a JSON Schema document with a couple additional enrichments. It was built to solve a reoccuring task at my work where I would have to consistently provide Interface Control Documents (ICD) for JSON that changed frequently. Passing a JSON schema with an added description and example field for each fieldname was what I found to be the best way to keep users down range informed about the data they were working with since it is more compact than a standard ICD and can be printed quickly for transport into a SCIF. Just paste your JSON, enrich it with descriptions and examples, and download the result.
+SchemaScribe is a lightweight, tool that converts any JSON into a JSON Schema document with a couple additional enrichments. It was built to solve a reoccuring task work where I would have to consistently provide Interface Control Documents (ICD) for JSON that changed frequently. Passing a JSON schema with an added description and example field for each fieldname was what I found to be the best way to keep users down range informed about the data they were working with since it is more compact than a standard ICD and can be printed or copied down and ingested quickly for transport into a SCIF. Just paste your JSON, enrich it with descriptions and examples, and download the result.
 
 ## Features
 
