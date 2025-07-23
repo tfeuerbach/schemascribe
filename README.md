@@ -29,4 +29,5 @@ This project is open-source (MIT License). Contributions are welcome! Please fee
 
 - [ ] JSON validator.
 - [ ] Upgrade from CodeMirror 5 to CodeMirror 6 to improve editor performance and adopt modern best practices.
-- [ ] Convert JS to TSX.
+- [ ] Convert JavaScript to TypeScript.
+- [ ] Add testing suite.
