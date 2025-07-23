@@ -12,6 +12,7 @@ export const DOM = {
     requiredCheckbox: document.getElementById('include-required'),
     schemaCheckbox: document.getElementById('include-schema'),
     idCheckbox: document.getElementById('include-id'),
+    deduplicateCheckbox: document.getElementById('deduplicate'),
     titleInput: document.getElementById('schema-title'),
     jsonInputContainer: document.getElementById('json-input-container'),
     schemaOutputContainer: document.getElementById('schema-output-container'),
@@ -21,6 +22,7 @@ export const DOM = {
     requiredCheckboxAnno: document.getElementById('include-required-anno'),
     schemaCheckboxAnno: document.getElementById('include-schema-anno'),
     idCheckboxAnno: document.getElementById('include-id-anno'),
+    deduplicateCheckboxAnno: document.getElementById('deduplicate-anno'),
     titleInputAnno: document.getElementById('schema-title-anno'),
 };
 

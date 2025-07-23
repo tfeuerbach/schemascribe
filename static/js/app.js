@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const useId = fromInputView ? UI.DOM.idCheckbox.checked : UI.DOM.idCheckboxAnno.checked;
             const useRequired = fromInputView ? UI.DOM.requiredCheckbox.checked : UI.DOM.requiredCheckboxAnno.checked;
             const title = fromInputView ? UI.DOM.titleInput.value : UI.DOM.titleInputAnno.value;
+            const deduplicate = fromInputView ? UI.DOM.deduplicateCheckbox.checked : UI.DOM.deduplicateCheckboxAnno.checked;
 
             if (useSchema) {
                 schema['$schema'] = 'http://json-schema.org/draft-04/schema#';
@@ -43,6 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 };
                 stripRequired(schema);
+            }
+
+            // Simplify duplicate array schemas if option selected
+            if (deduplicate) {
+                const simplify = (node) => {
+                    if (!node || typeof node !== 'object') return;
+                    if (node.type === 'array' && node.items && node.items.anyOf && Array.isArray(node.items.anyOf) && node.items.anyOf.length > 0) {
+                        node.items = node.items.anyOf[0];
+                    }
+                    // Recurse into possible nested schemas
+                    if (node.properties) {
+                        Object.values(node.properties).forEach(simplify);
+                    }
+                    if (node.items) {
+                        simplify(node.items);
+                    }
+                    if (node.anyOf) {
+                        node.anyOf.forEach(simplify);
+                    }
+                };
+                simplify(schema);
             }
             return schema;
         } catch (error) {
@@ -100,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.DOM.requiredCheckboxAnno.checked = UI.DOM.requiredCheckbox.checked;
         UI.DOM.schemaCheckboxAnno.checked = UI.DOM.schemaCheckbox.checked;
         UI.DOM.idCheckboxAnno.checked = UI.DOM.idCheckbox.checked;
+        UI.DOM.deduplicateCheckboxAnno.checked = UI.DOM.deduplicateCheckbox.checked;
         UI.DOM.titleInputAnno.value = UI.DOM.titleInput.value;
 
         UI.displaySchema(currentSchema);
@@ -167,7 +190,7 @@ a.click();
         }
     }
 
-    [UI.DOM.requiredCheckboxAnno, UI.DOM.schemaCheckboxAnno, UI.DOM.idCheckboxAnno].forEach(el => {
+    [UI.DOM.requiredCheckboxAnno, UI.DOM.schemaCheckboxAnno, UI.DOM.idCheckboxAnno, UI.DOM.deduplicateCheckboxAnno].forEach(el => {
         el.addEventListener('change', rerenderSchemaWithOptions);
     });
     UI.DOM.titleInputAnno.addEventListener('input', rerenderSchemaWithOptions);
